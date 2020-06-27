@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "./node_modules/standard/eslintrc.json",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "eslint-config-react-app"
+  ],
+
+  "plugins": ["prettier"],
+
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
