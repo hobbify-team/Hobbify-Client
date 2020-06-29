@@ -1,0 +1,138 @@
+executors:
+  node:
+    parameters:
+      image:
+        type: string
+        default: "10"
+    docker:
+      - image: circleci/node:<< parameters.image >>
+
+aliases:
+  restore_cache: &restore_cache
+    restore_cache:
+      name: Restore Npm Package Cache
+      keys:
+        - v{{ .Environment.versionCache }}-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ checksum ".circleci/config.yml" }}
+
+  install_node_modules: &install_node_modules
+    run:
+      name: Install NPM dependencies
+      command: npm install
+
+  save_cache: &save_cache
+    save_cache:
+      name: Save NPM package cache
+      key: v{{ .Environment.versionCache }}-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ checksum ".circleci/config.yml" }}
+      paths:
+        - ./node_modules
+
+version: 2.1
+
+jobs:
+  install-dependencies:
+    executor: node
+    steps:
+      - checkout
+      - <<: *restore_cache
+      - <<: *install_node_modules
+      - <<: *save_cache
+  build-prod:
+    executor: node
+    steps:
+      - checkout
+      - <<: *restore_cache
+      - <<: *install_node_modules
+      - run:
+          name: Build Prod
+          command: npm run build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist
+  build-qa:
+    executor: node
+    steps:
+      - checkout
+      - <<: *restore_cache
+      - <<: *install_node_modules
+      - run:
+          name: Build QA
+          command: npm run build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist
+  deploy-prod:
+    docker:
+      - image: circleci/python:2.7-jessie
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3 (Prod)
+          command: aws s3 sync --delete dist s3://hobbify.app
+
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/dist
+
+      - attach_workspace:
+          at: ~/
+  deploy-qa:
+    docker:
+      - image: circleci/python:2.7-jessie
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3 (QA)
+          command: aws s3 sync --delete dist s3://hobbify.qa.app
+
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/dist
+
+      - attach_workspace:
+          at: ~/
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - install-dependencies:
+          filters:
+            branches:
+              only:
+                - master
+                - prev-master
+
+      # if pushed to master branch, build and deploy there ->
+      - build-prod:
+          requires:
+            - install-dependencies
+          filters:
+            branches:
+              only: master
+      - deploy-prod:
+          requires:
+            - build-prod
+
+      # if pushed to a pull request, build and deploy to QA ->
+      - build-qa:
+          requires:
+            - install-dependencies
+          filters:
+            branches:
+              ignore: master
+              only: prev-master
+      - deploy-qa:
+          requires:
+            - build-qa
