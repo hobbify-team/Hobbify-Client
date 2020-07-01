@@ -1,5 +1,11 @@
 import React from "react";
-import ReactDom from "react-dom";
-import { App } from "./App";
+import ReactDOM from "react-dom";
+import Routing from "./routing";
+import "antd/dist/antd.css";
 
-ReactDom.render(<App />, document.getElementById("app"));
+ReactDOM.render(
+  <React.StrictMode>
+    <Routing />
+  </React.StrictMode>,
+  document.getElementById("app")
+);
