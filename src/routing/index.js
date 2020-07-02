@@ -5,6 +5,7 @@ import { GlobalStyles } from "../styles";
 
 // Scenes
 import { Register } from "../scenes/auth/register";
+import InitialHome from "../scenes/InitialHome";
 
 const Routing = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const Routing = () => (
       {/* <Route exact path="/" component={Landing} /> */}
       {/* Auth */}
       <Route exact path="/register" component={Register} />
+      <Route exact path="/initialhome" component={InitialHome} />
     </Switch>
   </BrowserRouter>
 );
