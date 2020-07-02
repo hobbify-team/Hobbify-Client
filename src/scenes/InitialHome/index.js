@@ -1,71 +1,60 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Button } from "antd";
 import InitialHomeImg from "../../assets/initialhome.svg";
 import { Link } from "react-router-dom";
 
-const Div = styled.div`
+const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const H1 = styled.h1`
-  && {
-    font-size: 1.1rem;
-    margin-top: 72px;
-  }
+const Title = styled.h1`
+  font-size: 1.1rem;
+  margin-top: 72px;
 `;
 
-const StyledImage = styled.img`
+const Image = styled.img`
   width: 240px;
   margin-top: 64px;
   margin-bottom: 72px;
 `;
 
-const DivButtons = styled.div`
-  display: flex;
-  flex-direction: column;
+const Buttons = styled.div`
+  display: block;
 `;
 
-const StyledButtonRoutine = styled(Button)`
-  && {
-    width: 296px;
-    margin-bottom: 34px;
-    margin-top: 0;
-  }
+const ButtonMixin = css`
+  margin-bottom: 34px;
+  margin-top: 0;
 `;
 
-const StyledButtonProfile = styled(Button)`
-  && {
-    width: 296px;
-    margin-bottom: 34px;
-    margin-top: 0;
-    border: solid #1d3557 1px;
-  }
+const StyledButton = styled(Button)`
+  ${ButtonMixin};
 `;
 
 function InitialHome() {
   return (
-    <Div>
-      <H1>WELCOME TO OUR COMMUNITY</H1>
+    <Content>
+      <Title>WELCOME TO OUR COMMUNITY</Title>
       <figure>
-        <StyledImage
-          src={InitialHomeImg}
-          alt="Initial Home Image"
-        ></StyledImage>
+        <Image src={InitialHomeImg} alt="Initial Home Image"></Image>
       </figure>
-      <DivButtons>
+      <Buttons>
         <Link to="/">
-          <StyledButtonRoutine type="primary" size="large">
+          <StyledButton type="primary" size="large" block>
             CREATE ROUTINE
-          </StyledButtonRoutine>
+          </StyledButton>
+          {/* Insert modal for create routine */}
         </Link>
-        <Link to="/">
-          <StyledButtonProfile size="large">EDIT PROFILE</StyledButtonProfile>
+        <Link to="/profile/update">
+          <StyledButton size="large" block>
+            EDIT PROFILE
+          </StyledButton>
         </Link>
-      </DivButtons>
-    </Div>
+      </Buttons>
+    </Content>
   );
 }
 

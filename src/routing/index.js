@@ -6,7 +6,7 @@ import { GlobalStyles } from "../styles";
 // Scenes
 import { Register } from "../scenes/auth/register";
 import InitialHome from "../scenes/InitialHome";
-import VerificationEMail from "../scenes/VerificationMail";
+import VerificationEmail from "../scenes/VerificationEmail";
 
 const Routing = () => (
   <BrowserRouter>
@@ -17,8 +17,9 @@ const Routing = () => (
       {/* <Route exact path="/" component={Landing} /> */}
       {/* Auth */}
       <Route exact path="/register" component={Register} />
-      <Route exact path="/verificationemail" component={VerificationEMail} />
-      <Route exact path="/initialhome" component={InitialHome} />
+      <Route exact path="/verification" component={VerificationEmail} />
+      {/* Home */}
+      <Route exact path="/onboarding" component={InitialHome} />
     </Switch>
   </BrowserRouter>
 );
