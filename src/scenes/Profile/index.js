@@ -17,7 +17,7 @@ const ImageContainer = styled.div`
     margin-top: 50px;
 `;
 
-const IMG = styled.img`
+const ProfileImage = styled.img`
     height: 100%;
     padding-right: 200px;
 `;
@@ -34,21 +34,21 @@ const H3 = styled.h3`
     margin-left: 24px;
 `;
 
-const UL = styled.ul`
+const UnorderedList = styled.ul`
     margin-top: 8px;
     margin-left: 24px;
 `;
 
-const LI = styled.li`
+const ListItems = styled.li`
     font-size: .9rem;
     font-weight: 500;
 `;
 
-const BUTTON = styled(Button)`
+const LogoutButton = styled(Button)`
     margin-top: 22px;
 `;
 
-const DivSwitch = styled(Switch)`
+const SwitchButton = styled(Switch)`
     position: absolute;
     bottom: 38px;
     left: 230px;
@@ -63,29 +63,29 @@ function Profile( {name, email, username, accountType, startDate} ) {
     return (
         <Container>
             <ImageContainer>
-                <IMG src={ProfilePicture} alt="Profile picture"></IMG>
+                <ProfileImage src={ProfilePicture} alt="Profile picture"></ProfileImage>
             </ImageContainer>
             <InformationDiv>
                 <H3>
                     General Information
                 </H3>
-                <UL>
-                    <LI>username: {username}</LI>
-                    <LI>email: {email}</LI>
-                </UL>
+                <UnorderedList>
+                    <ListItems>username: {username}</ListItems>
+                    <ListItems>email: {email}</ListItems>
+                </UnorderedList>
             </InformationDiv>
             <InformationDiv>
                 <H3>Details Account</H3>
-                <UL>
-                    <LI>Name: {name}</LI>
-                    <LI>Start date: {startDate}</LI>
-                    <LI>{accountType}</LI>
-                </UL>
-                <DivSwitch defaultChecked size="small" onChange={switchOnChange}></DivSwitch>
+                <UnorderedList>
+                    <ListItems>Name: {name}</ListItems>
+                    <ListItems>Start date: {startDate}</ListItems>
+                    <ListItems>{accountType}</ListItems>
+                </UnorderedList>
+                <SwitchButton defaultChecked size="small" onChange={switchOnChange}></SwitchButton>
             </InformationDiv>
-            <BUTTON size="large" type="default">
+            <LogoutButton size="large" type="default">
                 LOG OUT
-            </BUTTON>
+            </LogoutButton>
         </Container>
     )
 }
