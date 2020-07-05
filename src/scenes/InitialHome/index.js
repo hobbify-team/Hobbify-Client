@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { Button } from "antd";
 import InitialHomeImg from "../../assets/initialhome.svg";
 import { Link } from "react-router-dom";
+import { ModalAddRoutine } from "../../components/ModalAddRoutine";
 
 const Content = styled.div`
   display: flex;
@@ -35,6 +36,12 @@ const StyledButton = styled(Button)`
 `;
 
 function InitialHome() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const showModal = (value) => {
+    setIsVisible(value);
+  };
+
   return (
     <Content>
       <Title>WELCOME TO OUR COMMUNITY</Title>
@@ -42,12 +49,16 @@ function InitialHome() {
         <Image src={InitialHomeImg} alt="Initial Home Image"></Image>
       </figure>
       <Buttons>
-        <Link to="/">
-          <StyledButton type="primary" size="large" block>
-            CREATE ROUTINE
-          </StyledButton>
-          {/* Insert modal for create routine */}
-        </Link>
+        <StyledButton
+          type="primary"
+          size="large"
+          block
+          onClick={() => showModal(true)}
+        >
+          CREATE ROUTINE
+        </StyledButton>
+        {/* Insert modal for create routine */}
+        <ModalAddRoutine isVisible={isVisible} showModal={showModal} />
         <Link to="/profile/update">
           <StyledButton size="large" block>
             EDIT PROFILE

@@ -21,4 +21,13 @@ export const GlobalStyles = createGlobalStyle`
     padding:0;
   }
   ul {list-style: none;}
+  .ant-modal-mask {
+    background-color: rgba(255, 255, 255, 0.45) !important;
+  }
+  .ant-select {
+    width: 100%;
+  }
+  .ant-form-item {
+    margin-bottom: 10px !important;
+  }
 `;
