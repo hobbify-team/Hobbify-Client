@@ -7,6 +7,7 @@ const { Option } = Select;
 const Content = styled.div`
   margin: 0px;
 `;
+
 const ButtonSignUp = styled.div`
   display: block;
   margin: auto;
