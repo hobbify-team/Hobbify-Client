@@ -30,11 +30,14 @@ function Navigation({ location }) {
   return (
     <Content>
       <div>
-        <Link to="/routines">ROUTINES</Link>
+        <Link to="/">ROUTINES</Link>
       </div>
       <div>PROGESS</div>
       <div>GROUPS</div>
-      <div>PROFILE</div>
+      <div>
+        {" "}
+        <Link to="/profile">PROFILE</Link>
+      </div>
     </Content>
   );
 }
