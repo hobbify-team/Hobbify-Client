@@ -57,7 +57,7 @@ function InitialHome() {
         >
           CREATE ROUTINE
         </StyledButton>
-        {/* Insert modal for create routine */}
+        {/* modal for create routine */}
         <ModalAddRoutine isVisible={isVisible} showModal={showModal} />
         <Link to="/profile/update">
           <StyledButton size="large" block>
