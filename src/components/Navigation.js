@@ -13,6 +13,7 @@ const Content = styled.div`
   background: #ffe9ef;
   padding: 15px 10px;
   font-size: 12px;
+  z-index: 1;
 `;
 
 function Navigation({ location }) {

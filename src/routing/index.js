@@ -11,6 +11,7 @@ import InitialHome from "../scenes/initialHome";
 import VerificationEmail from "../scenes/verificationEmail";
 import Routines from "../scenes/routines";
 import Profile from "../scenes/profile";
+import { ProfileUpdate } from "../scenes/profile/update/";
 
 const Routing = () => (
   <BrowserRouter>
@@ -29,6 +30,7 @@ const Routing = () => (
       <Route exact path="/onboarding" component={InitialHome} />
       {/* Profile */}
       <Route exact path="/profile" component={Profile} />
+      <Route path="/profile/update" component={ProfileUpdate} />
     </Switch>
   </BrowserRouter>
 );

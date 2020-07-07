@@ -2,90 +2,115 @@ import React from "react";
 import styled from "styled-components";
 import { Button, Switch } from "antd";
 import ProfilePicture from "../../assets/profile-picture.svg";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 30px;
 `;
 
 const ImageContainer = styled.div`
-  width: 168px;
-  height: 168px;
   border-radius: 50%;
-  overflow: hidden;
-  margin-top: 50px;
+  margin: auto;
+  display: block;
+  text-align: center;
 `;
 
 const ProfileImage = styled.img`
-  height: 100%;
-  padding-right: 200px;
+  border-radius: 50%;
+  border: 1px solid #e5e5e5;
+  width: 100px;
+  height: 100px;
 `;
 
-const InformationDiv = styled.div`
-  margin-top: 18px;
-  box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.5);
-  width: 280px;
-  height: 125px;
+const LogoutButton = styled.div`
+  position: fixed;
+  bottom: 60px;
+  right: 0;
+  left: 0;
+  text-align: center;
 `;
 
-const H3 = styled.h3`
+const ButtonEditProfile = styled.button`
+  text-align: center;
+  margin: 18px auto 0;
+  display: block;
+  padding: 6px 20px;
+  background: transparent;
+  border: 1px solid #e5e5e5;
+`;
+
+const MainInformation = styled.div`
+  text-align: center;
   margin-top: 10px;
-  margin-left: 24px;
-`;
-
-const UnorderedList = styled.ul`
-  margin-top: 8px;
-  margin-left: 24px;
-`;
-
-const ListItems = styled.li`
-  font-size: 0.9rem;
-  font-weight: 500;
-`;
-
-const LogoutButton = styled(Button)`
-  margin-top: 22px;
-`;
-
-const SwitchButton = styled(Switch)`
-  position: absolute;
-  bottom: 38px;
-  left: 230px;
-`;
-
-function Profile({ name, email, username, accountType, startDate }) {
-  function switchOnChange(checked) {
-    console.log(`You have switched on profile view`);
+  h3,
+  p {
+    margin: 0;
   }
+`;
 
+const Actions = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  div:first-child {
+    margin-right: 8px;
+  }
+`;
+
+const ButtonChangeView = styled.button`
+  border: 1px solid #e5e5e5;
+  padding: 6px 10px;
+  background: #fff;
+`;
+
+const United = styled.small`
+  margin: 10px auto;
+  display: block;
+  text-align: center;
+`;
+
+const Bio = styled.p`
+  color: grey;
+`;
+
+const Separated = styled.hr`
+  width: 100%;
+  margin: 20px 0;
+  border: 1px solid #e5e5e5;
+`;
+
+function Profile() {
   return (
     <Container>
       <ImageContainer>
-        <ProfileImage src={ProfilePicture} alt="Profile picture"></ProfileImage>
+        <ProfileImage src={ProfilePicture} alt="Profile picture" />
       </ImageContainer>
-      <InformationDiv>
-        <H3>General Information</H3>
-        <UnorderedList>
-          <ListItems>username: {username}</ListItems>
-          <ListItems>email: {email}</ListItems>
-        </UnorderedList>
-      </InformationDiv>
-      <InformationDiv>
-        <H3>Details Account</H3>
-        <UnorderedList>
-          <ListItems>Name: {name}</ListItems>
-          <ListItems>Start date: {startDate}</ListItems>
-          <ListItems>{accountType}</ListItems>
-        </UnorderedList>
-        <SwitchButton
-          defaultChecked
-          size="small"
-          onChange={switchOnChange}
-        ></SwitchButton>
-      </InformationDiv>
-      <LogoutButton size="large" type="default">
-        LOG OUT
+      <MainInformation>
+        <h3>Iamyoujared</h3>
+        <p>Jared Ortega</p>
+      </MainInformation>
+      <Actions>
+        <div>
+          <Link to="profile/update">
+            <ButtonEditProfile>Edit profile</ButtonEditProfile>
+          </Link>
+        </div>
+        <div>
+          <ButtonChangeView>Private</ButtonChangeView>
+        </div>
+      </Actions>
+      <United>Se unio el 23 de Abril del 2020</United>
+      <Separated />
+      <Bio>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, saepe
+        praesentium deleniti voluptatum maiores corporis soluta possimus aperiam
+        laborum nulla provident repellat, facilis ut exercitationem, dolor iure
+        ab cupiditate consectetur.
+      </Bio>
+      <LogoutButton>
+        <Button size="large" type="default">
+          LOG OUT
+        </Button>
       </LogoutButton>
     </Container>
   );
