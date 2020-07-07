@@ -12,6 +12,7 @@ import VerificationEmail from "../scenes/verificationEmail";
 import Routines from "../scenes/routines";
 import Profile from "../scenes/profile";
 import { ProfileUpdate } from "../scenes/profile/update/";
+import { Login } from "../scenes/auth/login";
 
 const Routing = () => (
   <BrowserRouter>
@@ -24,7 +25,7 @@ const Routing = () => (
       {/* Auth */}
       <Route exact path="/auth" component={Auth} />
       <Route exact path="/register" component={Register} />
-      <Route exact path="/login" component={Register} />
+      <Route exact path="/login" component={Login} />
       <Route exact path="/verification" component={VerificationEmail} />
       {/* Essentials */}
       <Route exact path="/onboarding" component={InitialHome} />
