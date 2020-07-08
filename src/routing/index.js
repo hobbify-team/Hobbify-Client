@@ -7,11 +7,11 @@ import Navigation from "../components/Navigation";
 // Scenes
 import Auth from "../scenes/auth/index";
 import { Register } from "../scenes/auth/register";
-import InitialHome from "../scenes/initialHome";
-import VerificationEmail from "../scenes/verificationEmail";
+import InitialHome from "../scenes/initialHome/index";
+import VerificationEmail from "../scenes/verificationEmail/index";
 import Routines from "../scenes/routines";
-import Profile from "../scenes/profile";
-import { ProfileUpdate } from "../scenes/profile/update/";
+import Profile from "../scenes/profile/index";
+import { ProfileUpdate } from "../scenes/profile/update/index";
 import { Login } from "../scenes/auth/login";
 
 const Routing = () => (
