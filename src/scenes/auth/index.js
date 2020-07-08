@@ -32,7 +32,7 @@ function Auth() {
         <Image src={AuthImage} alt="Landing Home Image"></Image>
       </figure>
       <Buttons>
-        <Link to="/">
+        <Link to="/login">
           <StyledButton type="primary" size="large" block>
             SIGN IN
           </StyledButton>
