@@ -7,10 +7,10 @@ import Navigation from "../components/Navigation";
 // Scenes
 import Auth from "../scenes/auth/index";
 import { Register } from "../scenes/auth/register";
-import { InitialHome } from "../scenes/initialHome";
-import { VerificationEmail } from "../scenes/verificationEmail/index";
+import { InitialHome } from "../scenes/InitialHome";
+import { VerificationEmail } from "../scenes/VerificationEmail/index";
 import { Routines } from "../scenes/routines";
-import { Profile } from "../scenes/profile/index";
+import { Profile } from "../scenes/Profile/index";
 import { ProfileUpdate } from "../scenes/profile/update/index";
 import { Login } from "../scenes/auth/login";
 
