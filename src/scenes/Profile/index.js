@@ -79,7 +79,7 @@ const Separated = styled.hr`
   border: 1px solid #e5e5e5;
 `;
 
-function Profile() {
+export const Profile = () => {
   return (
     <Container>
       <ImageContainer>
@@ -114,6 +114,4 @@ function Profile() {
       </LogoutButton>
     </Container>
   );
-}
-
-export default Profile;
+};

@@ -27,7 +27,7 @@ const Image = styled.img`
   margin-top: 88px;
 `;
 
-function VerificationEmail() {
+export const VerificationEmail = () => {
   return (
     <Content>
       <Title>EMAIL SEND</Title>
@@ -39,6 +39,4 @@ function VerificationEmail() {
       </figure>
     </Content>
   );
-}
-
-export default VerificationEmail;
+};

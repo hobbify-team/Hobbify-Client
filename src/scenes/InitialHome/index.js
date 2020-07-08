@@ -35,7 +35,7 @@ const StyledButton = styled(Button)`
   ${ButtonMixin};
 `;
 
-function InitialHome() {
+export const InitialHome = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const showModal = (value) => {
@@ -67,6 +67,4 @@ function InitialHome() {
       </Buttons>
     </Content>
   );
-}
-
-export default InitialHome;
+};

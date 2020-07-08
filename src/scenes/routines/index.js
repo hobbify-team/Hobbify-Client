@@ -43,7 +43,7 @@ const FloatingActionButton = styled.div`
   right: 16px;
 `;
 
-function Routines() {
+export const Routines = () => {
   const [habits, sethabits] = useState([
     "Reading",
     "Writing",
@@ -94,6 +94,4 @@ function Routines() {
       </Container>
     </Fragment>
   );
-}
-
-export default Routines;
+};
