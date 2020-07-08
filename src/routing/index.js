@@ -13,6 +13,7 @@ import Routines from "../scenes/routines";
 import Profile from "../scenes/profile";
 import { ProfileUpdate } from "../scenes/profile/update/";
 import { Login } from "../scenes/auth/login";
+import GroupsLayout from "../scenes/GroupsLayout";
 
 const Routing = () => (
   <BrowserRouter>
@@ -32,6 +33,8 @@ const Routing = () => (
       {/* Profile */}
       <Route exact path="/profile" component={Profile} />
       <Route path="/profile/update" component={ProfileUpdate} />
+      {/* Groups */}
+      <Route exact path="/groups" component={GroupsLayout} />
     </Switch>
   </BrowserRouter>
 );
