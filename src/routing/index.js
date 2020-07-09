@@ -11,7 +11,7 @@ import { InitialHome } from "../scenes/InitialHome";
 import { VerificationEmail } from "../scenes/VerificationEmail/index";
 import { Routines } from "../scenes/routines";
 import { Profile } from "../scenes/Profile/index";
-import { ProfileUpdate } from "../scenes/profile/update/index";
+import { ProfileUpdate } from "../scenes/Profile/update/index";
 import { Login } from "../scenes/auth/login";
 
 const Routing = () => (
