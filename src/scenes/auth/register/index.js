@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import RegisterImage from "../../../assets/register.svg";
 import { Form, Input, Button } from "antd";
 
 const Content = styled.div`
@@ -12,11 +11,6 @@ const ButtonSignUp = styled.div`
   margin: auto;
   padding: 20px 0;
   text-align: center;
-`;
-
-const Image = styled.img`
-  display: block;
-  margin: auto;
 `;
 
 function RegisterForm({ form }) {
@@ -34,6 +28,7 @@ function RegisterForm({ form }) {
 
   return (
     <Content>
+      <h2>Register</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Item label="Username">
           {getFieldDecorator("username", {
@@ -72,6 +67,36 @@ function RegisterForm({ form }) {
             <Input type="password" placeholder="6+ characters" size="large" />
           )}
         </Form.Item>
+        <Form.Item label="First Name">
+          {getFieldDecorator("firstname", {
+            rules: [
+              {
+                required: true,
+                message: "Please enter a first name!",
+              },
+            ],
+          })(<Input placeholder="First name" size="large" />)}
+        </Form.Item>
+        <Form.Item label="Last Name">
+          {getFieldDecorator("lastname", {
+            rules: [
+              {
+                required: true,
+                message: "Please enter a last name!",
+              },
+            ],
+          })(<Input placeholder="Last name" size="large" />)}
+        </Form.Item>
+        <Form.Item label="Phone number">
+          {getFieldDecorator("phonenumber", {
+            rules: [
+              {
+                required: true,
+                message: "Please enter a phone number!",
+              },
+            ],
+          })(<Input placeholder="Phone number" size="large" type="number" />)}
+        </Form.Item>
         <Form.Item>
           <ButtonSignUp>
             <Button type="primary" htmlType="submit" size="large">
@@ -80,7 +105,6 @@ function RegisterForm({ form }) {
           </ButtonSignUp>
         </Form.Item>
       </Form>
-      <Image src={RegisterImage} alt="Imagen de registro" />
     </Content>
   );
 }
