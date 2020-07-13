@@ -2,3 +2,9 @@
 from = "/*"
 to = "/index.html"
 status = 200
+
+[[redirects]]
+  from = "https://hobbify.netlify.app/*"
+  to = "https://www.hobbify.netlify.app/:splat"
+  status = 301
+  force = true

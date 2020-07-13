@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Upload, Icon, message } from "antd";
 
-export default function UploadPicture() {
+export default function UploadPicture({ setObjImageUrl }) {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
@@ -32,6 +32,7 @@ export default function UploadPicture() {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, (_imageUrl) => {
         setImageUrl(_imageUrl);
+        setObjImageUrl(_imageUrl);
         setLoading(false);
       });
     }

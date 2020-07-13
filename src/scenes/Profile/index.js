@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import * as usuarioAction from "../../actions/usuarioAction";
 import styled from "styled-components";
 import { Button, Switch } from "antd";
 import ProfilePicture from "../../assets/profile-picture.svg";
 import { Link } from "react-router-dom";
+import RoutinesTabs from "./routines";
 
 const Container = styled.div`
   margin: 30px;
@@ -79,15 +82,24 @@ const Separated = styled.hr`
   border: 1px solid #e5e5e5;
 `;
 
-export const Profile = () => {
+const Profile = ({ usuario, getInfoUser }) => {
+  const information = localStorage.getItem("information");
+  const userTransform = JSON.parse(information);
+  useEffect(() => {
+    if (Object.entries(usuario).length === 0) {
+      getInfoUser(userTransform.username);
+    }
+  }, []);
   return (
     <Container>
       <ImageContainer>
         <ProfileImage src={ProfilePicture} alt="Profile picture" />
       </ImageContainer>
       <MainInformation>
-        <h3>Iamyoujared</h3>
-        <p>Jared Ortega</p>
+        <h3>{usuario.username}</h3>
+        <p>
+          {usuario.first_name} {usuario.last_name}
+        </p>
       </MainInformation>
       <Actions>
         <div>
@@ -95,18 +107,9 @@ export const Profile = () => {
             <ButtonEditProfile>Edit profile</ButtonEditProfile>
           </Link>
         </div>
-        <div>
-          <ButtonChangeView>Private</ButtonChangeView>
-        </div>
       </Actions>
-      <United>Se unio el 23 de Abril del 2020</United>
-      <Separated />
-      <Bio>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, saepe
-        praesentium deleniti voluptatum maiores corporis soluta possimus aperiam
-        laborum nulla provident repellat, facilis ut exercitationem, dolor iure
-        ab cupiditate consectetur.
-      </Bio>
+      <United>{usuario.created}</United>
+      <RoutinesTabs />
       <LogoutButton>
         <Button size="large" type="default">
           LOG OUT
@@ -115,3 +118,9 @@ export const Profile = () => {
     </Container>
   );
 };
+
+const mapStateToProps = (reducers) => {
+  return reducers.usuarioReducer;
+};
+
+export default connect(mapStateToProps, usuarioAction)(Profile);
