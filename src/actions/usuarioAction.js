@@ -2,7 +2,7 @@ import axios from "axios";
 import { message } from "antd";
 
 const information = localStorage.getItem("information");
-const url = "http://52.15.100.49:8000/";
+const url = "http://3.128.90.196:5000/";
 
 export const login = (values) => (dispatch) => {
   axios({
