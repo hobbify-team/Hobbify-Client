@@ -57,11 +57,6 @@ const Routines = ({ history }) => {
       history.push(`/`);
     }
   }, []);
-  // if (!isLogged) {
-  //   console.log("no esta logeado");
-  // } else {
-  //   history.push(`/`);
-  // }
 
   const [habits, sethabits] = useState([
     "Reading",
