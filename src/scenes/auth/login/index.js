@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import * as usuarioAction from "../../../actions/usuarioAction";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 import LoginPicture from "../../../assets/login.svg";
-import { Icon, Input, Button, Form } from "antd";
+import { Input, Button, Form } from "antd";
 
 const Content = styled.div`
   margin: 30px 20px;
@@ -24,15 +27,24 @@ const ButtonLogIn = styled.div`
   text-align: center;
 `;
 
-function LoginForm({ form }) {
+function LoginForm({ form, history, login }) {
   Form.create();
   const { getFieldDecorator } = form;
+  const information = localStorage.getItem("information");
+  const userTransform = JSON.parse(information);
+  const isLogged = userTransform || "";
+  // useEffect(() => {
+  //   if (isLogged) {
+  //     history.push(`/`);
+  //   }
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        login(values);
+        history.push(`/`);
       }
     });
   };
@@ -79,5 +91,6 @@ function LoginForm({ form }) {
     </Content>
   );
 }
-
-export const Login = Form.create()(LoginForm);
+const Login = Form.create()(LoginForm);
+const LoginWithRouter = withRouter(Login);
+export default connect(null, usuarioAction)(LoginWithRouter);

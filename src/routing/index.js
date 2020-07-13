@@ -7,12 +7,13 @@ import Navigation from "../components/Navigation";
 // Scenes
 import Auth from "../scenes/auth/index";
 import { Register } from "../scenes/auth/register";
+import Login from "../scenes/auth/login";
 import { InitialHome } from "../scenes/InitialHome";
 import { VerificationEmail } from "../scenes/VerificationEmail/index";
-import { Routines } from "../scenes/routines";
-import { Profile } from "../scenes/Profile/index";
-import { ProfileUpdate } from "../scenes/Profile/update/index";
-import { Login } from "../scenes/auth/login";
+import Routines from "../scenes/routines";
+import Profile from "../scenes/Profile/index";
+import ProfileUpdate from "../scenes/Profile/update/index";
+import Progress from "../scenes/progress";
 
 const Routing = () => (
   <BrowserRouter>
@@ -29,6 +30,7 @@ const Routing = () => (
       <Route exact path="/verification" component={VerificationEmail} />
       {/* Essentials */}
       <Route exact path="/onboarding" component={InitialHome} />
+      <Route exact path="/progress" component={Progress} />
       {/* Profile */}
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/profile/update" component={ProfileUpdate} />

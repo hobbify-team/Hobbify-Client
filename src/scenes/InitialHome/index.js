@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { Button } from "antd";
 import InitialHomeImg from "../../assets/initialhome.svg";
 import { Link } from "react-router-dom";
-import { ModalAddRoutine } from "../../components/ModalAddRoutine";
+import ModalAddRoutine from "../../components/ModalAddRoutine";
 
 const Content = styled.div`
   display: flex;

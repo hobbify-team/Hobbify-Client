@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import { Button, Icon } from "antd";
 import Routine from "../../components/Routine";
 import styled from "styled-components";
 import UsualHomePicture from "../../assets/usual-home.svg";
-import { ModalAddRoutine } from "../../components/ModalAddRoutine";
+import ModalAddRoutine from "../../components/ModalAddRoutine";
 
 const Container = styled.div`
   height: calc(100vh - 48px);
@@ -43,7 +44,25 @@ const FloatingActionButton = styled.div`
   right: 16px;
 `;
 
-export const Routines = () => {
+const Routines = ({ history }) => {
+  const information = localStorage.getItem("information");
+  const userTransform = JSON.parse(information);
+  const isLogged = userTransform || "";
+  console.log(isLogged);
+
+  useEffect(() => {
+    if (!isLogged) {
+      history.push(`/auth`);
+    } else {
+      history.push(`/`);
+    }
+  }, []);
+  // if (!isLogged) {
+  //   console.log("no esta logeado");
+  // } else {
+  //   history.push(`/`);
+  // }
+
   const [habits, sethabits] = useState([
     "Reading",
     "Writing",
@@ -95,3 +114,5 @@ export const Routines = () => {
     </Fragment>
   );
 };
+
+export default withRouter(Routines);
