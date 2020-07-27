@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Modal, Checkbox } from "antd";
+import useFrequency from "../hooks/useFrequency";
 
 const Container = styled.div`
   display: flex;
@@ -51,7 +52,7 @@ const ListItems = styled.li`
   font-weight: 500;
 `;
 
-function Routine({ name, frequency, start_date, end_date }) {
+function Routine({ name, frequency, start_date, end_date, description }) {
   function onChange(e) {
     console.log(`checked = ${e.target.checked}`);
   }
@@ -82,7 +83,8 @@ function Routine({ name, frequency, start_date, end_date }) {
             <TitleModal>Details routine</TitleModal>
             <UnorderedList>
               <ListItems>Name: {name}</ListItems>
-              <ListItems>Frecuency: {frequency}</ListItems>
+              <ListItems>Description: {description}</ListItems>
+              <ListItems>Frecuency: {useFrequency(frequency)}</ListItems>
               <ListItems>Begin: {start_date}</ListItems>
               <ListItems>End: {end_date}</ListItems>
               <ListItems>Progress:</ListItems>
