@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Modal, Checkbox } from "antd";
+import { Modal, Checkbox, message } from "antd";
 import useFrequency from "../hooks/useFrequency";
+import { login } from "../actions/usuarioAction";
 
 const Container = styled.div`
   display: flex;
@@ -25,6 +26,13 @@ const ContainerRoutine = styled.div`
 const RoutineName = styled.h3`
   margin: 0 0 0 24px;
   font-size: 1.2rem;
+`;
+
+const RoutineNameChecked = styled.h3`
+  margin: 0 0 0 24px;
+  font-size: 1.2rem;
+  text-decoration-line: line-through;
+  color: #7d7d7d;
 `;
 
 const ContentModal = styled.div`
@@ -53,8 +61,15 @@ const ListItems = styled.li`
 `;
 
 function Routine({ name, frequency, start_date, end_date, description }) {
+
+  const [done, setDone] = useState(false)
+
   function onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
+    setDone(e.target.checked)
+    if (e.target.checked) {
+      message.success('Well done! keep it up :)')
+    }
+    // console.log(`checked = ${e.target.checked}`);
   }
 
   const [isVisible, setIsVisible] = useState(false);
@@ -66,7 +81,13 @@ function Routine({ name, frequency, start_date, end_date, description }) {
   return (
     <Container>
       <ContainerRoutine>
-        <RoutineName>{name}</RoutineName>
+        {
+          done ? (
+            <RoutineNameChecked>{name}</RoutineNameChecked>
+          ) : (
+            <RoutineName>{name}</RoutineName>
+          )
+        }
       </ContainerRoutine>
       <div>
         <Checkbox onChange={onChange}></Checkbox>
