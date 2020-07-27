@@ -32,7 +32,6 @@ const Icon = styled.img`
 `;
 
 const IconProgress = styled.img`
-  
   height: 14.39px;
   margin-bottom: 4px;
 `;

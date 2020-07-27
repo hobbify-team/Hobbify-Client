@@ -6,6 +6,7 @@ import { Button, Switch } from "antd";
 import ProfilePicture from "../../assets/profile-picture.svg";
 import { Link } from "react-router-dom";
 import RoutinesTabs from "./routines";
+import useFormatDate from '../../hooks/useFormatDate';
 
 const Container = styled.div`
   margin: 30px;
@@ -90,6 +91,9 @@ const Profile = ({ usuario, getInfoUser }) => {
       getInfoUser(userTransform.username);
     }
   }, []);
+
+  const created = `Member since: ${useFormatDate(usuario.created)}`;
+
   return (
     <Container>
       <ImageContainer>
@@ -108,7 +112,7 @@ const Profile = ({ usuario, getInfoUser }) => {
           </Link>
         </div>
       </Actions>
-      <United>{usuario.created}</United>
+      <United>{created}</United>
       <RoutinesTabs />
       <LogoutButton>
         <Button size="large" type="default">

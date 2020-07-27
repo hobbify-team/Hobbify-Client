@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Modal, Checkbox, message } from "antd";
 import useFrequency from "../hooks/useFrequency";
 import { login } from "../actions/usuarioAction";
+import useFormatDate from '../hooks/useFormatDate'
 
 const Container = styled.div`
   display: flex;
@@ -106,8 +107,8 @@ function Routine({ name, frequency, start_date, end_date, description }) {
               <ListItems>Name: {name}</ListItems>
               <ListItems>Description: {description}</ListItems>
               <ListItems>Frecuency: {useFrequency(frequency)}</ListItems>
-              <ListItems>Begin: {start_date}</ListItems>
-              <ListItems>End: {end_date}</ListItems>
+              <ListItems>Begin: {useFormatDate(start_date)}</ListItems>
+              {/* <ListItems>End: {end_date}</ListItems> */}
               <ListItems>Progress:</ListItems>
             </UnorderedList>
           </ContentModal>
