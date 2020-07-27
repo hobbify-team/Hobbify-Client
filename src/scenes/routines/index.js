@@ -6,6 +6,9 @@ import styled from "styled-components";
 import UsualHomePicture from "../../assets/usual-home.svg";
 import ModalAddRoutine from "../../components/ModalAddRoutine";
 
+import { connect } from "react-redux";
+import * as routinesAction from '../../actions/routinesAction'
+
 const Container = styled.div`
   height: calc(100vh - 48px);
   position: relative;
@@ -44,7 +47,8 @@ const FloatingActionButton = styled.div`
   right: 16px;
 `;
 
-const Routines = ({ history }) => {
+const Routines = ({ history, routinesPrivate, routinesPublic, getRoutines }) => {
+
   const information = localStorage.getItem("information");
   const userTransform = JSON.parse(information);
   const isLogged = userTransform || "";
@@ -58,15 +62,13 @@ const Routines = ({ history }) => {
     }
   }, []);
 
-  const [habits, sethabits] = useState([
-    "Reading",
-    "Writing",
-    "Exercise",
-    "Visit Family",
-    "Study English",
-    "Sleeping More",
-    "Eating healthy",
-  ]);
+  useEffect(() => {
+    getRoutines(userTransform.username);
+  }, [])
+
+  // const [habits, sethabits] = useState([
+  //   "Hola"
+  // ]);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -88,9 +90,21 @@ const Routines = ({ history }) => {
         </ContainerPictureAndTitle>
 
         <ContainerRoutines>
-          {habits.map((habit) => (
-            <Routine routine={habit} />
-          ))}
+          {
+            routinesPublic.length === 0 ? (
+              <p>We have no public routines</p>
+            ) : (
+              routinesPublic.map( r => <Routine {...r} />)
+            )
+          }
+
+          {
+            routinesPrivate.length === 0 ? (
+              <p>We have no private routines</p>
+            ) : (
+                routinesPrivate.map(r => <Routine {...r} />)
+              )
+          }
         </ContainerRoutines>
 
         <FloatingActionButton>
@@ -110,4 +124,9 @@ const Routines = ({ history }) => {
   );
 };
 
-export default withRouter(Routines);
+const mapStateToProps = (reducers) => {
+  return reducers.routinesReducer;
+}
+
+// export default withRouter(Routines);
+export default connect(mapStateToProps, routinesAction)(Routines)

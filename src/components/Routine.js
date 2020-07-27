@@ -51,7 +51,7 @@ const ListItems = styled.li`
   font-weight: 500;
 `;
 
-function Routine({ routine }) {
+function Routine({ name, frequency, start_date, end_date }) {
   function onChange(e) {
     console.log(`checked = ${e.target.checked}`);
   }
@@ -65,7 +65,7 @@ function Routine({ routine }) {
   return (
     <Container>
       <ContainerRoutine>
-        <RoutineName>{routine}</RoutineName>
+        <RoutineName>{name}</RoutineName>
       </ContainerRoutine>
       <div>
         <Checkbox onChange={onChange}></Checkbox>
@@ -81,10 +81,10 @@ function Routine({ routine }) {
           <ContentModal>
             <TitleModal>Details routine</TitleModal>
             <UnorderedList>
-              <ListItems>Name:</ListItems>
-              <ListItems>Frecuency:</ListItems>
-              <ListItems>Begin:</ListItems>
-              <ListItems>End:</ListItems>
+              <ListItems>Name: {name}</ListItems>
+              <ListItems>Frecuency: {frequency}</ListItems>
+              <ListItems>Begin: {start_date}</ListItems>
+              <ListItems>End: {end_date}</ListItems>
               <ListItems>Progress:</ListItems>
             </UnorderedList>
           </ContentModal>
