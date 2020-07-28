@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Form, Input, Button } from "antd";
 
+import axios from "axios"
+import Axios from "axios";
+
 const Content = styled.div`
   margin: 30px 20px;
 `;
@@ -17,11 +20,42 @@ function RegisterForm({ form }) {
   Form.create();
   const { getFieldDecorator } = form;
 
+  const data = {
+    email: "yokki@dev.com",
+    username: "Yoiky",
+    phone_number: "5736268308",
+    password: "hfj5ngbg8",
+    password_confirmation: "hfj5ngbg8",
+    first_name: "Mei",
+    last_name: "Yoki",
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     form.validateFields((err, values) => {
+
       if (!err) {
         console.log("Received values of form: ", values);
+
+        let data = {
+          email: values.email,
+          username: values.username,
+          phone_number: values.phonenumber,
+          password: values.password,
+          password_confirmation: values.password,
+          first_name: values.firstname,
+          last_name: values.lastname,
+        };
+
+        console.log(data)
+
+        axios.post(
+            "http://ec2-18-220-111-217.us-east-2.compute.amazonaws.com/users/signup/", data
+          )
+          .then(() => alert("Usuario creado"))
+          .catch((e) => {
+            console.log(e);
+          });
       }
     });
   };
