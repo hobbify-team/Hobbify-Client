@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as routinesAction from "../actions/routinesAction";
 import styled from "styled-components";
-import { Form, Input, Modal, Select, Button } from "antd";
+import { Form, Input, Modal, Select, Button, Switch } from "antd";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -21,6 +21,11 @@ const Title = styled.h2`
   text-align: center;
 `;
 
+const TypeOfRoutine = styled.p`
+  margin: 0;
+  padding: 0;
+`;
+
 function WrapperModal({ form, isVisible, showModal, createRoutine }) {
   Form.create();
   const { getFieldDecorator } = form;
@@ -36,6 +41,12 @@ function WrapperModal({ form, isVisible, showModal, createRoutine }) {
       }
     });
   };
+
+  const [switchChecked, setSwitchChecked] = useState(true)
+
+  function handleSwitchType(checked) {
+    setSwitchChecked(checked)
+  }
 
   return (
     <Modal
@@ -85,6 +96,11 @@ function WrapperModal({ form, isVisible, showModal, createRoutine }) {
                 <Option value="4">Each 3 days</Option>
                 <Option value="5">Weekend</Option>
               </Select>
+            )}
+          </Form.Item>
+          <Form.Item label={switchChecked ? "private" : "public"}>
+            {getFieldDecorator("is_private", {})(
+              <Switch onChange={handleSwitchType} defaultChecked={true}/>
             )}
           </Form.Item>
           <Form.Item>

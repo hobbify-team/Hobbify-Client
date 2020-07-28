@@ -36,6 +36,8 @@ export const getRoutines = (username) => (dispatch) => {
 export const createRoutine = (username, values) => (dispatch) => {
   const information = localStorage.getItem("information");
   const token = JSON.parse(information);
+  console.log('Here the values');
+  console.log(values);
   axios({
     method: "post",
     url: `${url}${username}/habits/`,
