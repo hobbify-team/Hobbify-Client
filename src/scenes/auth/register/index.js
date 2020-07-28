@@ -121,7 +121,7 @@ function RegisterForm({ form }) {
                 message: "Please enter a phone number!",
               },
             ],
-          })(<Input placeholder="Phone number" size="large" type="number" />)}
+          })(<Input placeholder="10+ characters" size="large" type="number" />)}
         </Form.Item>
         <Form.Item>
           <ButtonSignUp>
