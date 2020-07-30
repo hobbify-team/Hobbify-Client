@@ -92,6 +92,11 @@ const Profile = ({ usuario, getInfoUser }) => {
     }
   }, []);
 
+  const handleLogOut = () => {
+    localStorage.clear();
+    window.location.href = '/';
+  }
+
   const created = `Member since: ${useFormatDate(usuario.created)}`;
 
   return (
@@ -115,7 +120,7 @@ const Profile = ({ usuario, getInfoUser }) => {
       <United>{created}</United>
       <RoutinesTabs />
       <LogoutButton>
-        <Button size="large" type="default">
+        <Button size="large" type="default" onClick={handleLogOut}>
           LOG OUT
         </Button>
       </LogoutButton>
