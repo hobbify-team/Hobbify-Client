@@ -43,7 +43,7 @@ function RegisterForm({ form }) {
           )
           .then(() => {
             message.success('Great! now you can Login and start creating habits :)')
-            window.location = "/login";
+            window.location.href = `/`;
           })
           .catch((e) => {
             console.log(e);
