@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { Button } from "antd";
 import AuthImage from "../../assets/auth.svg";
@@ -25,7 +26,17 @@ const ButtonMixin = css`
 const StyledButton = styled(Button)`
   ${ButtonMixin};
 `;
-function Auth() {
+function Auth({ history }) {
+  const information = localStorage.getItem("information");
+  const userTransform = JSON.parse(information);
+  const isLogged = userTransform || "";
+  useEffect(() => {
+    if (isLogged) {
+      history.push(`/`);
+    } else {
+      history.push(`/auth`);
+    }
+  }, []);
   return (
     <Content>
       <figure>
@@ -46,5 +57,4 @@ function Auth() {
     </Content>
   );
 }
-
-export default Auth;
+export default withRouter(Auth);

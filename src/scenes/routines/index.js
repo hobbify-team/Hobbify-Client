@@ -1,9 +1,13 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import { Button, Icon } from "antd";
 import Routine from "../../components/Routine";
 import styled from "styled-components";
 import UsualHomePicture from "../../assets/usual-home.svg";
-import { ModalAddRoutine } from "../../components/ModalAddRoutine";
+import ModalAddRoutine from "../../components/ModalAddRoutine";
+
+import { connect } from "react-redux";
+import * as routinesAction from '../../actions/routinesAction'
 
 const Container = styled.div`
   height: calc(100vh - 48px);
@@ -43,16 +47,28 @@ const FloatingActionButton = styled.div`
   right: 16px;
 `;
 
-export const Routines = () => {
-  const [habits, sethabits] = useState([
-    "Reading",
-    "Writing",
-    "Exercise",
-    "Visit Family",
-    "Study English",
-    "Sleeping More",
-    "Eating healthy",
-  ]);
+const Routines = ({ history, routinesPrivate, routinesPublic, getRoutines }) => {
+
+  const information = localStorage.getItem("information");
+  const userTransform = JSON.parse(information);
+  const isLogged = userTransform || "";
+  console.log(isLogged);
+
+  useEffect(() => {
+    if (!isLogged) {
+      history.push(`/auth`);
+    } else {
+      history.push(`/`);
+    }
+  }, []);
+
+  useEffect(() => {
+    getRoutines(userTransform.username);
+  }, [])
+
+  // const [habits, sethabits] = useState([
+  //   "Hola"
+  // ]);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -74,9 +90,21 @@ export const Routines = () => {
         </ContainerPictureAndTitle>
 
         <ContainerRoutines>
-          {habits.map((habit) => (
-            <Routine routine={habit} />
-          ))}
+          {
+            routinesPublic.length === 0 ? (
+              <p>We have no public routines</p>
+            ) : (
+              routinesPublic.map( r => <Routine {...r} />)
+            )
+          }
+
+          {
+            routinesPrivate.length === 0 ? (
+              <p>We have no private routines</p>
+            ) : (
+                routinesPrivate.map(r => <Routine {...r} />)
+              )
+          }
         </ContainerRoutines>
 
         <FloatingActionButton>
@@ -95,3 +123,10 @@ export const Routines = () => {
     </Fragment>
   );
 };
+
+const mapStateToProps = (reducers) => {
+  return reducers.routinesReducer;
+}
+
+// export default withRouter(Routines);
+export default connect(mapStateToProps, routinesAction)(Routines)

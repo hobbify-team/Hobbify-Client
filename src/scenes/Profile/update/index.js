@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import * as usuarioAction from "../../../actions/usuarioAction";
 import styled from "styled-components";
 import UploadPicture from "./UploadPicture";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Switch } from "antd";
 
 const { TextArea } = Input;
 
@@ -16,23 +18,39 @@ const ButtonSave = styled.div`
   text-align: center;
 `;
 
-function ProfileUpdateWrapper({ form }) {
+function ProfileUpdateWrapper({ form, updateInfoUser, usuario }) {
   Form.create();
-  const { getFieldDecorator } = form;
+  const { getFieldDecorator, setFieldsValue } = form;
 
+  useEffect(() => {
+    setFieldsValue({
+      username: usuario.username,
+      biography: usuario.profile.biography,
+    });
+  }, []);
+
+  const [imageUrl, setObjImageUrl] = useState("");
+
+  const information = localStorage.getItem("information");
+  const userTransform = JSON.parse(information);
   const handleSubmit = (e) => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        const fieldValues = {
+          ...values,
+          picture: imageUrl || null,
+        };
+        updateInfoUser(userTransform.username, fieldValues);
       }
     });
   };
   return (
     <Content>
+      {console.log(usuario.profile.is_hidden)}
       <h2>Profile Update</h2>
       <Form onSubmit={handleSubmit}>
-        <UploadPicture />
+        <UploadPicture setObjImageUrl={setObjImageUrl} />
         <Form.Item label="Username">
           {getFieldDecorator(
             "username",
@@ -44,6 +62,12 @@ function ProfileUpdateWrapper({ form }) {
             "biography",
             {}
           )(<TextArea rows={4} placeholder="Biography" />)}
+        </Form.Item>
+        <Form.Item label="Public">
+          {getFieldDecorator(
+            "is_hidden",
+            {}
+          )(<Switch defaultChecked={usuario.profile.is_hidden} />)}
         </Form.Item>
         <Form.Item>
           <ButtonSave>
@@ -57,4 +81,9 @@ function ProfileUpdateWrapper({ form }) {
   );
 }
 
-export const ProfileUpdate = Form.create()(ProfileUpdateWrapper);
+const mapStateToProps = (reducers) => {
+  return reducers.usuarioReducer;
+};
+
+const ProfileUpdate = Form.create()(ProfileUpdateWrapper);
+export default connect(mapStateToProps, usuarioAction)(ProfileUpdate);

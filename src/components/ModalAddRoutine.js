@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import * as routinesAction from "../actions/routinesAction";
 import styled from "styled-components";
-import { Form, Input, Modal, Select, DatePicker, Button, Switch } from "antd";
+import { Form, Input, Modal, Select, Button, Switch } from "antd";
 
+const { TextArea } = Input;
 const { Option } = Select;
 
 const Content = styled.div`
@@ -14,33 +17,35 @@ const ButtonSignUp = styled.div`
   text-align: center;
 `;
 
-const Dates = styled.div`
-  display: flex;
-`;
-
 const Title = styled.h2`
   text-align: center;
 `;
 
-function WrapperModal({ form, isVisible, showModal }) {
+const TypeOfRoutine = styled.p`
+  margin: 0;
+  padding: 0;
+`;
+
+function WrapperModal({ form, isVisible, showModal, createRoutine }) {
   Form.create();
   const { getFieldDecorator } = form;
 
+  const information = localStorage.getItem("information");
+  const userTransform = JSON.parse(information);
   const handleSubmit = (e) => {
     e.preventDefault();
     form.validateFields((err, fieldsValue) => {
       if (!err) {
-        const values = {
-          ...fieldsValue,
-          "date-picker": fieldsValue["date-picker"].format("YYYY-MM-DD"),
-        };
-        console.log("Received values of form: ", values);
+        createRoutine(userTransform.username, fieldsValue);
+        showModal(false);
       }
     });
   };
 
-  function onChange(date, dateString) {
-    console.log(date, dateString);
+  const [switchChecked, setSwitchChecked] = useState(true)
+
+  function handleSwitchType(checked) {
+    setSwitchChecked(checked)
   }
 
   return (
@@ -64,6 +69,17 @@ function WrapperModal({ form, isVisible, showModal }) {
               ],
             })(<Input placeholder="Name routine" size="large" />)}
           </Form.Item>
+          <Form.Item label="Description">
+            {getFieldDecorator("description", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please enter a frecuency!",
+                },
+              ],
+            })(<TextArea rows={4} />)}
+          </Form.Item>
+
           <Form.Item label="Frecuency">
             {getFieldDecorator("frecuency", {
               rules: [
@@ -74,37 +90,18 @@ function WrapperModal({ form, isVisible, showModal }) {
               ],
             })(
               <Select size="large" placeholder="Select one">
-                <Option value="daily">Daily</Option>
-                <Option value="weekly">Weekly</Option>
-                <Option value="monthly">Monthly</Option>
-                <Option value="eachThreedays">Each 3 days</Option>
+                <Option value="1">Daily</Option>
+                <Option value="2">Weekly</Option>
+                <Option value="3">Monthly</Option>
+                <Option value="4">Each 3 days</Option>
+                <Option value="5">Weekend</Option>
               </Select>
             )}
           </Form.Item>
-          <Dates>
-            <Form.Item label="Start">
-              {getFieldDecorator("dateStart", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Please enter a date start!",
-                  },
-                ],
-              })(<DatePicker size="large" onChange={onChange} />)}
-            </Form.Item>
-            <Form.Item label="End">
-              {getFieldDecorator("dateEnd", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Please enter a date end!",
-                  },
-                ],
-              })(<DatePicker size="large" />)}
-            </Form.Item>
-          </Dates>
-          <Form.Item label="Public">
-            {getFieldDecorator("private", {})(<Switch />)}
+          <Form.Item label={switchChecked ? "private" : "public"}>
+            {getFieldDecorator("is_private", {})(
+              <Switch onChange={handleSwitchType} defaultChecked={true}/>
+            )}
           </Form.Item>
           <Form.Item>
             <ButtonSignUp>
@@ -119,4 +116,5 @@ function WrapperModal({ form, isVisible, showModal }) {
   );
 }
 
-export const ModalAddRoutine = Form.create()(WrapperModal);
+const ModalAddRoutine = Form.create()(WrapperModal);
+export default connect(null, routinesAction)(ModalAddRoutine);

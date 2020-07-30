@@ -34,9 +34,15 @@
   },
   "dependencies": {
     "antd": "^3.26.15",
+    "axios": "^0.19.2",
+    "date-fns": "^2.15.0",
     "react": "^16.13.1",
+    "react-calendar-heatmap": "^1.8.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "standard": "^14.3.4",
     "styled-components": "^4.3.2"
   }

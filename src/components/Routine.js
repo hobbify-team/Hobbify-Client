@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Modal, Checkbox } from "antd";
+import { Modal, Checkbox, message } from "antd";
+import useFrequency from "../hooks/useFrequency";
+import { login } from "../actions/usuarioAction";
+import useFormatDate from '../hooks/useFormatDate'
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +27,13 @@ const ContainerRoutine = styled.div`
 const RoutineName = styled.h3`
   margin: 0 0 0 24px;
   font-size: 1.2rem;
+`;
+
+const RoutineNameChecked = styled.h3`
+  margin: 0 0 0 24px;
+  font-size: 1.2rem;
+  text-decoration-line: line-through;
+  color: #7d7d7d;
 `;
 
 const ContentModal = styled.div`
@@ -51,9 +61,16 @@ const ListItems = styled.li`
   font-weight: 500;
 `;
 
-function Routine({ routine }) {
+function Routine({ name, frequency, start_date, end_date, description }) {
+
+  const [done, setDone] = useState(false)
+
   function onChange(e) {
-    console.log(`checked = ${e.target.checked}`);
+    setDone(e.target.checked)
+    if (e.target.checked) {
+      message.success('Well done! keep it up :)')
+    }
+    // console.log(`checked = ${e.target.checked}`);
   }
 
   const [isVisible, setIsVisible] = useState(false);
@@ -65,7 +82,13 @@ function Routine({ routine }) {
   return (
     <Container>
       <ContainerRoutine>
-        <RoutineName>{routine}</RoutineName>
+        {
+          done ? (
+            <RoutineNameChecked>{name}</RoutineNameChecked>
+          ) : (
+            <RoutineName>{name}</RoutineName>
+          )
+        }
       </ContainerRoutine>
       <div>
         <Checkbox onChange={onChange}></Checkbox>
@@ -81,10 +104,11 @@ function Routine({ routine }) {
           <ContentModal>
             <TitleModal>Details routine</TitleModal>
             <UnorderedList>
-              <ListItems>Name:</ListItems>
-              <ListItems>Frecuency:</ListItems>
-              <ListItems>Begin:</ListItems>
-              <ListItems>End:</ListItems>
+              <ListItems>Name: {name}</ListItems>
+              <ListItems>Description: {description}</ListItems>
+              <ListItems>Frecuency: {useFrequency(frequency)}</ListItems>
+              <ListItems>Begin: {useFormatDate(start_date)}</ListItems>
+              {/* <ListItems>End: {end_date}</ListItems> */}
               <ListItems>Progress:</ListItems>
             </UnorderedList>
           </ContentModal>
