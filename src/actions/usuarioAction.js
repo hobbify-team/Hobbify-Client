@@ -24,6 +24,7 @@ export const login = (values) => (dispatch) => {
       };
 
       localStorage.setItem("information", JSON.stringify(Userinformation));
+      window.location.href = '/';
     })
     .catch(function (error) {
       console.log(error);

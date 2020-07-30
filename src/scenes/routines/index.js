@@ -52,7 +52,7 @@ const Routines = ({ history, routinesPrivate, routinesPublic, getRoutines }) => 
   const information = localStorage.getItem("information");
   const userTransform = JSON.parse(information);
   const isLogged = userTransform || "";
-  console.log(isLogged);
+  // console.log(isLogged);
 
   useEffect(() => {
     if (!isLogged) {
@@ -63,12 +63,10 @@ const Routines = ({ history, routinesPrivate, routinesPublic, getRoutines }) => 
   }, []);
 
   useEffect(() => {
-    getRoutines(userTransform.username);
+    if (isLogged) {
+      getRoutines(userTransform.username);
+    }
   }, [])
-
-  // const [habits, sethabits] = useState([
-  //   "Hola"
-  // ]);
 
   const [isVisible, setIsVisible] = useState(false);
 

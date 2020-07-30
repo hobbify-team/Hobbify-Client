@@ -10,10 +10,8 @@ import "antd/dist/antd.css";
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <Routing />
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById("app")
 );

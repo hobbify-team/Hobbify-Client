@@ -30,6 +30,7 @@ function Auth({ history }) {
   const information = localStorage.getItem("information");
   const userTransform = JSON.parse(information);
   const isLogged = userTransform || "";
+
   useEffect(() => {
     if (isLogged) {
       history.push(`/`);
@@ -37,6 +38,7 @@ function Auth({ history }) {
       history.push(`/auth`);
     }
   }, []);
+
   return (
     <Content>
       <figure>
