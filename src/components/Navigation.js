@@ -55,18 +55,30 @@ function Navigation({ location }) {
 
   return (
     <Content>
-      <PageContainer>
-        <Icon src={RoutinesImg} />
-        <Link to="/">ROUTINES</Link>
-      </PageContainer>
-      <PageContainer>
-        <IconProgress src={ProgressIcon} />
-        <Link to="/progress">PROGRESS</Link>
-      </PageContainer>
-      <PageContainer>
-        <IconProfile src={ProfileIcon} />
-        <Link to="/profile">PROFILE</Link>
-      </PageContainer>
+      <Link to="/">
+        <PageContainer>
+          <Icon src={RoutinesImg} />
+          {/* <Link to="/">ROUTINES</Link> */}
+        </PageContainer>
+        ROUTINES
+      </Link>
+
+      <Link to="/progress">
+        <PageContainer>
+          <IconProgress src={ProgressIcon} />
+          {/* <Link to="/progress">PROGRESS</Link> */}
+        </PageContainer>
+        PROGRESS
+      </Link>
+
+      <Link to="/profile">
+        <PageContainer>
+          <IconProfile src={ProfileIcon} />
+          {/* <Link to="/profile">PROFILE</Link> */}
+        </PageContainer>
+        PROFILE
+      </Link>
+
     </Content>
   );
 }
