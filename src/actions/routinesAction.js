@@ -3,7 +3,7 @@ import { message } from "antd";
 
 const information = localStorage.getItem("information");
 
-const url = "http://3.128.90.196:5000/";
+const url = "http://ec2-18-220-111-217.us-east-2.compute.amazonaws.com/";
 
 export const getRoutines = (username) => (dispatch) => {
   const information = localStorage.getItem("information");
@@ -36,6 +36,8 @@ export const getRoutines = (username) => (dispatch) => {
 export const createRoutine = (username, values) => (dispatch) => {
   const information = localStorage.getItem("information");
   const token = JSON.parse(information);
+  console.log('Here the values');
+  console.log(values);
   axios({
     method: "post",
     url: `${url}${username}/habits/`,

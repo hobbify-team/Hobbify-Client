@@ -33,11 +33,12 @@ function LoginForm({ form, history, login }) {
   const information = localStorage.getItem("information");
   const userTransform = JSON.parse(information);
   const isLogged = userTransform || "";
-  // useEffect(() => {
-  //   if (isLogged) {
-  //     history.push(`/`);
-  //   }
-  // }, []);
+
+  useEffect(() => {
+    if (isLogged) {
+      history.push(`/`);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
