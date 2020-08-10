@@ -39,7 +39,7 @@ function RegisterForm({ form }) {
         console.log(data)
 
         axios.post(
-            "http://ec2-18-220-111-217.us-east-2.compute.amazonaws.com/users/signup/", data
+            "https://api.hobbify.app/", data
           )
           .then(() => {
             message.success('Great! now you can Login and start creating habits :)')

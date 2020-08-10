@@ -2,7 +2,7 @@ import axios from "axios";
 import { message } from "antd";
 
 const information = localStorage.getItem("information");
-const url = "http://ec2-18-220-111-217.us-east-2.compute.amazonaws.com/";
+const url = "https://api.hobbify.app/";
 
 export const login = (values) => (dispatch) => {
   axios({
