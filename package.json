@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "antd": "^3.26.15",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "date-fns": "^2.15.0",
     "react": "^16.13.1",
     "react-calendar-heatmap": "^1.8.1",
