@@ -5,7 +5,7 @@ Hobbify allows users to track their progress on daily habits. Want to try practi
 ### Getting started 🚀
 
 1. Clone this project
-2. Go to the folder of the project `cd coronadata`
+2. Go to the folder of the project `cd hobbify`
 3. Install dependencies `npm install`
 4. Run the project in local environment `npm run start`
 
